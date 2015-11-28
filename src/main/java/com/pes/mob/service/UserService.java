@@ -1,0 +1,17 @@
+package com.pes.mob.service;
+
+import java.util.List;
+
+import com.pes.mob.model.User;
+
+public interface UserService {
+	 
+    User findById(String user_id);
+     
+    void saveUser(User user);
+     
+    void updateUser(User user);
+     
+    List<User> findAllUsers(); 
+     
+}
