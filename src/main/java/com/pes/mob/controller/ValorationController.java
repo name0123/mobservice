@@ -3,6 +3,7 @@ package com.pes.mob.controller;
 
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,25 +15,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Valoration;
 import com.pes.mob.service.PlaceService;
+import com.pes.mob.service.ValorationService;
 
 @RestController
-@RequestMapping(value="/places", headers = "Accept=application/json")
-public class PlaceController {
+@RequestMapping(value="/valorations", headers = "Accept=application/json")
+public class ValorationController {
     @Autowired 
-    PlaceService placeService;
+    ValorationService valorationService;
 	
 	
     @RequestMapping(value = { "/getall" }, method = RequestMethod.GET)
-    public  @ResponseBody List<Place> getAllPlaces() {
-       return placeService.findAllPlaces();
+    public  @ResponseBody Set<Valoration> getAllValorations() {
+       
+    	return valorationService.findAllValorations();
+       
        
     }
     
     @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-    public ResponseEntity<Place> savePlace(@RequestBody Place place) { 
-        placeService.savePlace(place);
-        return new ResponseEntity<Place>(place,HttpStatus.OK);
+    public ResponseEntity<Valoration> saveValoration(@RequestBody Valoration valor) { 
+    	valorationService.saveValoration(valor);
+        return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
 
     }
 	
