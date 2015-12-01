@@ -17,15 +17,12 @@ public class Prova implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		for (Place place: places) {
 			if (!placeService.exists(place.getFour_id())) placeService.savePlace(place);
 		}
 	}
 	
-	public Prova () {
-		
-	}
+	public Prova () {}
 	
 	public void set(List<Place> places) {
 		this.places = places;

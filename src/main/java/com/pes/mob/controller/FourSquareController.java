@@ -57,7 +57,7 @@ public class FourSquareController {
     	else if (!near.equals("")) targetUrl = new URL(targetUrl.toString()+"&near="+near);
     	else if (!sw.equals("") && !ne.equals("")) targetUrl = new URL(targetUrl.toString()+"&intent=browse"+"&sw="+sw+"&ne="+ne);
     	if (!query.equals("")) targetUrl = new URL(targetUrl.toString()+"&query="+query);
-    	if (!radius.equals("")) targetUrl = new URL(targetUrl.toString()+"&radius="+radius);
+    	if (!radius.equals("") && sw.equals("") && ne.equals("")) targetUrl = new URL(targetUrl.toString()+"&radius="+radius);
     	if (url.equals(targetUrl.toString())) return null;
     	targetUrl = new URL(targetUrl.toString()+"&limit="+limit);
     	System.out.println(targetUrl);
@@ -106,13 +106,8 @@ public class FourSquareController {
 	        		category = categories.getJSONObject(0).getString("name");
 	        	}
 	        	Place place = new Place(id, name, lat, lng, category);
-	        	/*if (!placeService.exists(id)) placeService.savePlace(place);
-	        	else place = placeService.findById(id);*/
 	        	places.add(place);
-	        }
-	        Prova prova = (Prova) ac.getBean("prova");
-	        prova.set(places);
-	        new Thread(prova).start();
+	        }        
         }
         else {
         	JSONObject j = result.getJSONObject("venue");
@@ -130,6 +125,9 @@ public class FourSquareController {
         	else place = placeService.findById(id);
         	places.add(place); 
         }
+        Prova prova = (Prova) ac.getBean("prova");
+        prova.set(places);
+        new Thread(prova).start();
         return places;
     }
 }
