@@ -46,6 +46,11 @@ public class PlaceServiceImpl implements PlaceService {
     public List<Place> findAllPlaces() {
         return dao.findAllPlaces();
     }
+
+	@Override
+	public boolean exists(String four_id) {
+		return this.findById(four_id) != null;
+	}
  
  
 }

@@ -13,6 +13,7 @@ public interface PlaceService {
     void updatePlace(Place place);
      
     List<Place> findAllPlaces(); 
+    
+    boolean exists(String four_id);
      
-
 }

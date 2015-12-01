@@ -51,11 +51,13 @@ public class Place {
 
 	public Place(){}
 	
-	public Place(String four_id, String name, Double lat, Double lng){
+	public Place(String four_id, String name, Double lat, Double lng, String category){
 		this.four_id = four_id;
 		this.name = name;
 		this.latitude = lat;
 		this.longitude = lng;
+		this.category = category;
+		this.adaptedLevel = AdaptedLevel.UNKNOWN;
 	}
 
 	public String getFour_id() {
