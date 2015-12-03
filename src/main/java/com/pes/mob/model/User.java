@@ -9,6 +9,8 @@ package com.pes.mob.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,8 +22,10 @@ public class User {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private String user_id;
-    @Column
+	private String user_id; //e-mail o facebook id
+	@Column
+	private String userN;
+	@Column
     private String name;
     @Column
     private String surname;
@@ -60,5 +64,10 @@ public class User {
 	public void setPhotopath(String photopath) {
 		this.photopath = photopath;
 	}
-	
+    public String getUserN() {
+		return userN;
+	}
+	public void setUserN(String userN) {
+		this.userN = userN;
+	}
 }

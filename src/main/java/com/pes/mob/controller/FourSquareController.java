@@ -31,7 +31,7 @@ import com.pes.mob.service.Prova;
 
 
 @RestController
-@RequestMapping(value="/4square", headers = "Accept=application/json")
+@RequestMapping("/4square")
 public class FourSquareController {
 	@Autowired
 	ApplicationContext ac;
@@ -44,7 +44,7 @@ public class FourSquareController {
 	final static String url = "https://api.foursquare.com/v2/venues/";
 	final static String oauth_token = "ZJPW24CEAOKHXMJGGUBCQWMZSZATFNZCFVVC0RCBNLKCREUK";
     
-    @RequestMapping(value="/search")
+    @RequestMapping("/search")
     public List<Place> searchVenues(@RequestParam(value="ll" , defaultValue="") String ll,
     		@RequestParam(value="near" , defaultValue="") String near,
     		@RequestParam(value="query" , defaultValue="") String query,

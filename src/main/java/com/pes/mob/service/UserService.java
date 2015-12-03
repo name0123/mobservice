@@ -7,6 +7,8 @@ import com.pes.mob.model.User;
 public interface UserService {
 	 
     User findById(String user_id);
+    
+    User fingByUserN(String userN);
      
     void saveUser(User user);
      

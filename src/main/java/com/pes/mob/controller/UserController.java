@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +23,17 @@ public class UserController {
 	
 	
     @RequestMapping(value = { "/getall" }, method = RequestMethod.GET)
-    public  @ResponseBody List<User> getAllUsers() {
+    public List<User> getAllUsers() {
        return userService.findAllUsers();
        
+    }
+    
+    @RequestMapping(value = { "/get" }, method = RequestMethod.GET)
+    public User getUser(@RequestParam(value="id", defaultValue="") String id,
+    					@RequestParam(value="userN", defaultValue="") String userN) {
+    	if (!id.equals("")) return userService.findById(id);  
+    	else if (!userN.equals("")) return userService.fingByUserN(userN);
+    	return null;
     }
     
     @RequestMapping(value = { "/new" }, method = RequestMethod.POST)

@@ -11,6 +11,8 @@ public interface UserDao {
 	
     User findById(String user_id);
     
+    User findByUserN(String userN);
+    
     void saveUser(User user);
          
     List<User> findAllUsers();
