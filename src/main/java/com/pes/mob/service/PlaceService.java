@@ -15,5 +15,7 @@ public interface PlaceService {
     List<Place> findAllPlaces(); 
     
     boolean exists(String four_id);
-     
+    
+    Place findByCoordinates(String ll);
+    
 }

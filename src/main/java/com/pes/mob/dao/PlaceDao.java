@@ -14,4 +14,6 @@ public interface PlaceDao {
      
     List<Place> findAllPlaces();
 
+	Place findByCoordinates(String latitude, String longitude);
+
 }

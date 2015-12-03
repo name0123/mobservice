@@ -51,6 +51,12 @@ public class PlaceServiceImpl implements PlaceService {
 	public boolean exists(String four_id) {
 		return this.findById(four_id) != null;
 	}
+
+	@Override
+	public Place findByCoordinates(String ll) {
+		String[] latlong = ll.split(",");
+		return dao.findByCoordinates(latlong[0], latlong[1]);
+	}
  
  
 }

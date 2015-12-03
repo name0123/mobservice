@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,5 +36,18 @@ public class PlaceController {
         return new ResponseEntity<Place>(place,HttpStatus.OK);
 
     }
+    
+    @RequestMapping(value = { "/get" }, method = RequestMethod.GET)
+    public  @ResponseBody Place getPlace(@RequestParam (value="ll", defaultValue="") String ll){
+       return placeService.findByCoordinates(ll);
+       
+    }
+    
+    /*@RequestMapping(value = { "/new" }, method = RequestMethod.PUT)
+    public ResponseEntity<Place> setAdaptationLevel(@RequestParam (value="ll", defaultValue="") String ll) { 
+        placeService.setAdaptationLevel(place);
+        return new ResponseEntity<Place>(place,HttpStatus.OK);
+
+    }*/
 	
 }
