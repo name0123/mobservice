@@ -7,11 +7,15 @@
  */
 package com.pes.mob.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -34,6 +38,20 @@ public class User {
     @Column
     private String photopath;
     
+    @OneToMany
+    @JoinTable(name="user_valoration",joinColumns=@JoinColumn(name="user_id"),
+    			inverseJoinColumns=@JoinColumn(name="valoration_id")
+    		)
+    private Collection<Valoration> userValorations = new ArrayList<Valoration>();
+    
+    
+
+	public Collection<Valoration> getUserValorations() {
+		return userValorations;
+	}
+	public void setUserValorations(Collection<Valoration> userValorations) {
+		this.userValorations = userValorations;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

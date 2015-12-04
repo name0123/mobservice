@@ -1,16 +1,15 @@
 /**
  *  author: 
  *  
- * create table valor (
- * 	valoration_id varchar(30)
-	user_id varchar(30) references fuser(user_id),
-	four_id varchar(30) references place(four_id),
-	access boolean,
-	wc boolean,
-	elevator VARCHAR(8),
-	detail VARCHAR(250),
-	PRIMARY KEY (user_id, four_id)
-);
+CREATE TABLE valor
+(
+  valoration_id character varying(30),
+  access boolean,
+  wc boolean,
+  elevator character varying(8),
+  detail character varying(250),
+	PRIMARY KEY (valoration_id)
+)
  * 
  * 
  */
@@ -23,6 +22,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -45,6 +45,17 @@ public class Valoration {
 	private Elev elevator;	
 	@Column
 	private String detail;
+	
+	@ManyToOne
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	public enum Elev{
 		HAS,HAS_NOT,NO_NEED

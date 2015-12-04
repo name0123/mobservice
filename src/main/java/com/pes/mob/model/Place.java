@@ -18,11 +18,17 @@ create table mplace (
 package com.pes.mob.model;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -39,10 +45,26 @@ public class Place {
 	private Double longitude;
 	@Column
 	private String category;
+	
+
 	@Column
 	@Enumerated(EnumType.STRING)
 	private AdaptedLevel adaptedLevel;	
 	
+	@OneToMany
+    @JoinTable(name="place_valoration",joinColumns=@JoinColumn(name="four_id"),
+    			inverseJoinColumns=@JoinColumn(name="valoration_id")
+    		)
+    private Collection<Valoration> placeValorations = new ArrayList<Valoration>();
+	
+	public Collection<Valoration> getPlaceValorations() {
+		return placeValorations;
+	}
+
+	public void setPlaceValorations(Collection<Valoration> placeValorations) {
+		this.placeValorations = placeValorations;
+	}
+
 	public enum AdaptedLevel {
 	    UNKNOWN, UNADAPTED, PARTIAL, TOTAL
 	}
