@@ -25,7 +25,6 @@ public class PlaceDaoImpl extends AbstractDao<String, Place> implements PlaceDao
         return (List<Place>) criteria.list();
     }
     
-    //no esta comprobado
 	@Override
 	public Place findByCoordinates(String latitude, String longitude) {
 		Criteria criteria = createEntityCriteria();

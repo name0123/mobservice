@@ -18,4 +18,6 @@ public interface PlaceService {
     
     Place findByCoordinates(String ll);
     
+    void updatePlace(String ll, String adaptedLevel);
+    
 }

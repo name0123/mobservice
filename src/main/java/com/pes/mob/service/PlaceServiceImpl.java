@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pes.mob.dao.PlaceDao;
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Place.AdaptedLevel;
 
 @Service("placeService")
 @Transactional
@@ -37,9 +38,8 @@ public class PlaceServiceImpl implements PlaceService {
      */
     public void updatePlace(Place place) {
     	Place entity = dao.findById(place.getFour_id());
-        if(entity!=null){
-            entity.setName(place.getName());
-            // set longitude, latitude .. etc
+        if(entity!=null) {
+            entity.setAdaptedLevel(place.getAdaptedLevel());
         }
     }
      
@@ -56,6 +56,15 @@ public class PlaceServiceImpl implements PlaceService {
 	public Place findByCoordinates(String ll) {
 		String[] latlong = ll.split(",");
 		return dao.findByCoordinates(latlong[0], latlong[1]);
+	}
+
+	@Override
+	public void updatePlace(String ll, String adaptedLevel) {
+		String[] latlong = ll.split(",");
+		Place place = dao.findByCoordinates(latlong[0], latlong[1]);
+		//afegir valoració i recalcular adaptedLevel
+		//actualitzar place si és necessari
+		this.updatePlace(place);
 	}
  
  

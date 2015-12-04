@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pes.mob.model.Place;
 import com.pes.mob.model.User;
 
 @Repository("userDao")
@@ -31,10 +32,8 @@ public class UserDaoImpl extends AbstractDao<String, User> implements UserDao {
     
     @SuppressWarnings("unchecked")
 	public User findByUserN(String userN) {
-		List<User> users = getSession().createCriteria(User.class)
-				.add(Restrictions.like("userN", userN, MatchMode.EXACT))
-				.list();
-		if (users.isEmpty()) return null;
-		return users.get(0);
+		Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("userN", userN));
+        return (User) criteria.uniqueResult();
 	}
 }
