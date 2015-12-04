@@ -2,7 +2,7 @@ package com.pes.mob.dao;
 
 
 
-import java.util.Set;
+import java.util.List;
 
 import com.pes.mob.model.Valoration;
 
@@ -13,7 +13,7 @@ public interface ValorationDao {
     
     void saveValoration(Valoration valor);
     
-    Set<Valoration> findAllValorations();
+    List<Valoration> findAllValorations();
  
 }
 

@@ -1,6 +1,6 @@
 package com.pes.mob.service;
 
-import java.util.Set;
+import java.util.List;
 
 import com.pes.mob.model.Valoration;
 
@@ -12,6 +12,6 @@ public interface ValorationService {
      
     void updateValoration(Valoration valor);
      
-   Set<Valoration> findAllValorations();
+   List<Valoration> findAllValorations();
      
 }

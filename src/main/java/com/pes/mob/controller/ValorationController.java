@@ -3,7 +3,6 @@ package com.pes.mob.controller;
 
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pes.mob.model.Place;
 import com.pes.mob.model.Valoration;
-import com.pes.mob.service.PlaceService;
 import com.pes.mob.service.ValorationService;
 
 @RestController
@@ -27,7 +24,7 @@ public class ValorationController {
 	
 	
     @RequestMapping(value = { "/getall" }, method = RequestMethod.GET)
-    public  @ResponseBody Set<Valoration> getAllValorations() {
+    public  @ResponseBody List<Valoration> getAllValorations() {
        
     	return valorationService.findAllValorations();
        

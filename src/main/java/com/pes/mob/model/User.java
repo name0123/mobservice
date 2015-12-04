@@ -10,6 +10,7 @@ package com.pes.mob.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,13 +19,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 @Entity
 @Table(name="fuser")
 public class User {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private String user_id; //e-mail o facebook id
 	@Column
@@ -38,12 +40,9 @@ public class User {
     @Column
     private String photopath;
     
+    @JsonIgnore
     @OneToMany
-    @JoinTable(name="user_valoration",joinColumns=@JoinColumn(name="user_id"),
-    			inverseJoinColumns=@JoinColumn(name="valoration_id")
-    		)
     private Collection<Valoration> userValorations = new ArrayList<Valoration>();
-    
     
 
 	public Collection<Valoration> getUserValorations() {

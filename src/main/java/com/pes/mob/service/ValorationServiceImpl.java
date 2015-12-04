@@ -8,7 +8,7 @@
 package com.pes.mob.service;
 
 
-import java.util.Set;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -38,7 +38,7 @@ public class ValorationServiceImpl implements ValorationService {
     	Valoration entity = dao.findById(valoration_id);
         if(entity!=null){        }
     }
-    public Set<Valoration> findAllValorations(){
+    public List<Valoration> findAllValorations(){
     	return dao.findAllValorations();
     }
 

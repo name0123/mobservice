@@ -22,6 +22,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,10 +34,6 @@ public class Valoration {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String valoration_id;
 	@Column
-	private String user_id;
-	@Column
-	private String four_id;
-	@Column
 	private boolean access;
 	@Column
 	private boolean wc;
@@ -45,9 +42,15 @@ public class Valoration {
 	private Elev elevator;	
 	@Column
 	private String detail;
+
 	
 	@ManyToOne
+	@JoinColumn(name="user_id",insertable=false, updatable=false)
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="four_id",insertable=false, updatable=false)
+	private Place place;
 	
 	public User getUser() {
 		return user;
@@ -57,6 +60,14 @@ public class Valoration {
 		this.user = user;
 	}
 	
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
 	public enum Elev{
 		HAS,HAS_NOT,NO_NEED
 	}
@@ -69,22 +80,6 @@ public class Valoration {
 
 	public void setValoration_id(String valoration_id) {
 		this.valoration_id = valoration_id;
-	}
-
-	public String getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getFour_id() {
-		return four_id;
-	}
-
-	public void setFour_id(String four_id) {
-		this.four_id = four_id;
 	}
 
 	public boolean isAccess() {

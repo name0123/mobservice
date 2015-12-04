@@ -1,6 +1,6 @@
 package com.pes.mob.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
@@ -21,9 +21,9 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
     }
     
     @SuppressWarnings("unchecked")
-    public Set<Valoration> findAllValorations(){
+    public List<Valoration> findAllValorations(){
     	Criteria criteria = createEntityCriteria();
-        return (Set<Valoration>) criteria.list();
+        return (List<Valoration>) criteria.list();
 
     }
  

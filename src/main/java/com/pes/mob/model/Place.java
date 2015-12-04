@@ -26,10 +26,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name="place")
@@ -51,10 +51,8 @@ public class Place {
 	@Enumerated(EnumType.STRING)
 	private AdaptedLevel adaptedLevel;	
 	
+	@JsonIgnore
 	@OneToMany
-    @JoinTable(name="place_valoration",joinColumns=@JoinColumn(name="four_id"),
-    			inverseJoinColumns=@JoinColumn(name="valoration_id")
-    		)
     private Collection<Valoration> placeValorations = new ArrayList<Valoration>();
 	
 	public Collection<Valoration> getPlaceValorations() {
