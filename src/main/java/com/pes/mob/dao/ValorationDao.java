@@ -4,6 +4,7 @@ package com.pes.mob.dao;
 
 import java.util.List;
 
+import com.pes.mob.model.Place;
 import com.pes.mob.model.Valoration;
 
 
@@ -14,6 +15,8 @@ public interface ValorationDao {
     void saveValoration(Valoration valor);
     
     List<Valoration> findAllValorations();
+    
+    Valoration findByCoordinates(String latitude, String longitude);
  
 }
 

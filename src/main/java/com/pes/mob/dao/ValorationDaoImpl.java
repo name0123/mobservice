@@ -3,8 +3,10 @@ package com.pes.mob.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.pes.mob.model.Place;
 import com.pes.mob.model.Valoration;
 
 @Repository("valorationDao")
@@ -27,5 +29,12 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
 
     }
  
+    @Override
+	public Valoration findByCoordinates(String latitude, String longitude) {
+		Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("latitude", Double.parseDouble(latitude)));
+        criteria.add(Restrictions.eq("longitude", Double.parseDouble(longitude)));
+        return (Valoration) criteria.uniqueResult();
+	}
 
 }

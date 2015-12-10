@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pes.mob.dao.ValorationDao;
+import com.pes.mob.model.Place;
 import com.pes.mob.model.Valoration;
 
 @Service("valorationService")
@@ -41,6 +42,10 @@ public class ValorationServiceImpl implements ValorationService {
     public List<Valoration> findAllValorations(){
     	return dao.findAllValorations();
     }
-
-
+    
+    @Override
+	public Valoration findByCoordinates(String ll) {
+		String[] latlong = ll.split(",");
+		return dao.findByCoordinates(latlong[0], latlong[1]);
+	}
 }

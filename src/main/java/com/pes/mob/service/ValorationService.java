@@ -7,6 +7,8 @@ import com.pes.mob.model.Valoration;
 public interface ValorationService {
 	 
 	Valoration findById(String valoration_id);
+	
+	Valoration findByCoordinates(String ll);
      
     void saveValoration(Valoration valor);
      
