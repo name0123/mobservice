@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pes.mob.dao.PlaceDao;
 import com.pes.mob.model.Place;
-import com.pes.mob.model.Place.AdaptedLevel;
 
 @Service("placeService")
 @Transactional

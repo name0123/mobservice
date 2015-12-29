@@ -3,7 +3,6 @@ package com.pes.mob.controller;
 
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
-import com.pes.mob.model.Valoration;
 import com.pes.mob.service.PlaceService;
 
 @RestController
@@ -44,6 +42,13 @@ public class PlaceController {
        return placeService.findByCoordinates(ll);
        
     }
+    @RequestMapping(value = { "/getid" }, method = RequestMethod.GET)
+    public Place getPlaceId(@RequestParam (value="id") String id){
+       return placeService.findById(id);
+       
+    }
+
+    
     
     @RequestMapping(value = { "/update" }, method = RequestMethod.PUT)
     public void updatePlace(@RequestParam(value="ll", defaultValue="") String ll,

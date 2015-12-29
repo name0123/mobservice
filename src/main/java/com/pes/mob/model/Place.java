@@ -33,6 +33,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name="place")
+
 public class Place {
 	@Id
 	@Column

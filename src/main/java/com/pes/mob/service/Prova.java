@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pes.mob.dao.PlaceDao;
 import com.pes.mob.model.Place;
-import com.pes.mob.service.PlaceService;
 
 @Service
 public class Prova implements Runnable {

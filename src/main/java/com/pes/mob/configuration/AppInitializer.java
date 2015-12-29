@@ -20,10 +20,5 @@ public class AppInitializer implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
     }
-    private AnnotationConfigWebApplicationContext getContext() {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("mob.pes.mob.configuration");
-        return context;
-    }
- 
+
 }

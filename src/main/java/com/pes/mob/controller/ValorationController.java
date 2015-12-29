@@ -1,7 +1,5 @@
 package com.pes.mob.controller;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.User;
 import com.pes.mob.model.Valoration;
+import com.pes.mob.service.PlaceService;
+import com.pes.mob.service.UserService;
 import com.pes.mob.service.ValorationService;
 
 @RestController
@@ -23,26 +24,38 @@ import com.pes.mob.service.ValorationService;
 public class ValorationController {
     @Autowired 
     ValorationService valorationService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    PlaceService placeService;
 	
 	
     @RequestMapping(value = { "/getall" }, method = RequestMethod.GET)
     public  @ResponseBody List<Valoration> getAllValorations() {
-       
-    	return valorationService.findAllValorations();
-       
+    	return valorationService.findAllValorations();      
        
     }
     
-    @RequestMapping(value = { "/new" }, method = RequestMethod.POST)
-    public ResponseEntity<Valoration> saveValoration(@RequestBody Valoration valor) { 
-    	valorationService.saveValoration(valor);
-        return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
-
-    }
-	
     @RequestMapping(value = { "/get" }, method = RequestMethod.GET)
     public Valoration getValoration(@RequestParam (value="ll", defaultValue="") String ll){
        return valorationService.findByCoordinates(ll);
        
+    }   
+
+    
+    
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public ResponseEntity<Valoration> saveValoration(@RequestBody Valoration valor) {
+    	System.err.println("Foooc:>>>>>>>>>>>>>>>>>>>>>" + valor.toString());
+    	
+    	User u = userService.findById(valor.getUser_id());
+
+    	Place p =  	placeService.findById(valor.getFour_id());
+    	
+    	valorationService.saveValoration(valor, u, p );
+
+    	return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
+
     }
+
 }

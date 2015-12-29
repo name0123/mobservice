@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.pes.mob.dao.ValorationDao;
 import com.pes.mob.model.Place;
+import com.pes.mob.model.User;
 import com.pes.mob.model.Valoration;
 
 @Service("valorationService")
@@ -47,5 +48,11 @@ public class ValorationServiceImpl implements ValorationService {
 	public Valoration findByCoordinates(String ll) {
 		String[] latlong = ll.split(",");
 		return dao.findByCoordinates(latlong[0], latlong[1]);
+	}
+
+	@Override
+	public void saveValoration(Valoration valor, User u, Place f) {
+		// TODO Auto-generated method stub
+		 dao.saveValoration(valor, u, f);
 	}
 }

@@ -7,10 +7,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.User;
 import com.pes.mob.model.Valoration;
 
 @Repository("valorationDao")
-
 public class ValorationDaoImpl extends AbstractDao<String, Valoration> implements ValorationDao {
 
 	
@@ -19,7 +19,8 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
     }
  
     public void saveValoration(Valoration valor) {
-        persist(valor);
+        // not real usage!
+    	persist(valor);
     }
     
     @SuppressWarnings("unchecked")
@@ -35,6 +36,16 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
         criteria.add(Restrictions.eq("latitude", Double.parseDouble(latitude)));
         criteria.add(Restrictions.eq("longitude", Double.parseDouble(longitude)));
         return (Valoration) criteria.uniqueResult();
+	}
+
+	@Override
+	public void saveValoration(Valoration valor, User user, Place f) {
+		// TODO Auto-generated method stub
+		valor.setPlace(f);
+		valor.setUser(user);
+		persist(valor);
+		
+		
 	}
 
 }

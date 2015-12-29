@@ -19,19 +19,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 @Entity
 @Table(name="valor")
+@JsonIgnoreProperties(ignoreUnknown = true) 
 public class Valoration {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column
 	private String valoration_id;
 	@Column
 	private boolean access;
@@ -42,8 +43,27 @@ public class Valoration {
 	private Elev elevator;	
 	@Column
 	private String detail;
+	
+	private String user_id;
+	private String four_id;
 
 	
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getFour_id() {
+		return four_id;
+	}
+
+	public void setFour_id(String four_id) {
+		this.four_id = four_id;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="user_id",insertable=false, updatable=false)
 	private User user;
@@ -113,6 +133,9 @@ public class Valoration {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	
+	@Override
+	public String toString(){
+		return "valoration: id = " +valoration_id+ " user_id:"+user_id+" place:" + four_id;
+	}
 	
 }
