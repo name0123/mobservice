@@ -1,5 +1,6 @@
 package com.pes.mob.dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -7,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Valoration;
 
 @Repository("placeDao")
 public class PlaceDaoImpl extends AbstractDao<String, Place> implements PlaceDao {
@@ -31,5 +33,12 @@ public class PlaceDaoImpl extends AbstractDao<String, Place> implements PlaceDao
         criteria.add(Restrictions.eq("latitude", Double.parseDouble(latitude)));
         criteria.add(Restrictions.eq("longitude", Double.parseDouble(longitude)));
         return (Place) criteria.uniqueResult();
+	}
+
+	@Override
+	public Collection<Valoration> findAllValorations(String id) {
+		// TODO Auto-generated method stub
+		Place p = findById(id);
+		return p.getPlaceValorations();
 	}
 }

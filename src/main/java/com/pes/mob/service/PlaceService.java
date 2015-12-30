@@ -1,8 +1,10 @@
 package com.pes.mob.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Valoration;
 
 public interface PlaceService {
 	
@@ -14,6 +16,8 @@ public interface PlaceService {
      
     List<Place> findAllPlaces(); 
     
+    Collection<Valoration> findAllValorations(String id);
+    
     boolean exists(String four_id);
     
     Place findByCoordinates(String ll);
@@ -21,3 +25,4 @@ public interface PlaceService {
     void updatePlace(String ll, String adaptedLevel);
     
 }
+

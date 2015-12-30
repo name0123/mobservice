@@ -6,6 +6,7 @@
  */
 package com.pes.mob.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pes.mob.dao.PlaceDao;
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Valoration;
 
 @Service("placeService")
 @Transactional
@@ -64,6 +66,13 @@ public class PlaceServiceImpl implements PlaceService {
 		//afegir valoració i recalcular adaptedLevel
 		//actualitzar place si és necessari
 		this.updatePlace(place);
+	}
+
+	@Override
+	public Collection<Valoration> findAllValorations(String id) {
+		// TODO Auto-generated method stub
+		Collection<Valoration> allVal = dao.findAllValorations(id);
+		return allVal;
 	}
  
  

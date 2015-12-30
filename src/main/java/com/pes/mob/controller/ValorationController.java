@@ -41,19 +41,13 @@ public class ValorationController {
        return valorationService.findByCoordinates(ll);
        
     }   
-
     
     
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<Valoration> saveValoration(@RequestBody Valoration valor) {
-    	System.err.println("Foooc:>>>>>>>>>>>>>>>>>>>>>" + valor.toString());
-    	
     	User u = userService.findById(valor.getUser_id());
-
     	Place p =  	placeService.findById(valor.getFour_id());
-    	
     	valorationService.saveValoration(valor, u, p );
-
     	return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
 
     }

@@ -2,6 +2,7 @@ package com.pes.mob.controller;
 
 
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
+import com.pes.mob.model.Valoration;
 import com.pes.mob.service.PlaceService;
 
 @RestController
@@ -47,8 +49,12 @@ public class PlaceController {
        return placeService.findById(id);
        
     }
+    @RequestMapping(value = { "/valorations" }, method = RequestMethod.GET)
+    public  Collection<Valoration> getAllValorations(@RequestParam (value="four_id")String id) {
+       return placeService.findAllValorations(id);
+       
+    }
 
-    
     
     @RequestMapping(value = { "/update" }, method = RequestMethod.PUT)
     public void updatePlace(@RequestParam(value="ll", defaultValue="") String ll,
