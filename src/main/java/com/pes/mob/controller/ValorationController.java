@@ -48,6 +48,7 @@ public class ValorationController {
     	User u = userService.findById(valor.getUser_id());
     	Place p =  	placeService.findById(valor.getFour_id());
     	valorationService.saveValoration(valor, u, p );
+    	placeService.updatePlace(p);
     	return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
 
     }

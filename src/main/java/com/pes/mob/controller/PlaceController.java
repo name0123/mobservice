@@ -49,12 +49,19 @@ public class PlaceController {
        return placeService.findById(id);
        
     }
+    
+    /**
+     * 
+     * All valorations of a place
+     * @param id
+     * @return
+     */
     @RequestMapping(value = { "/valorations" }, method = RequestMethod.GET)
     public  Collection<Valoration> getAllValorations(@RequestParam (value="four_id")String id) {
        return placeService.findAllValorations(id);
        
     }
-
+    
     
     @RequestMapping(value = { "/update" }, method = RequestMethod.PUT)
     public void updatePlace(@RequestParam(value="ll", defaultValue="") String ll,

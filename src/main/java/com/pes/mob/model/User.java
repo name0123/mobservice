@@ -7,11 +7,18 @@
  */
 package com.pes.mob.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 
@@ -35,16 +42,16 @@ public class User {
     private String photopath;
     
     
-//    @OneToMany
-//    private List<Valoration> userValorations = new ArrayList<Valoration>();
-//    
-//    @JsonIgnore
-//	public List<Valoration> getUserValorations() {
-//		return userValorations;
-//	}
-//	public void setUserValorations(List<Valoration> userValorations) {
-//		this.userValorations = userValorations;
-//	}
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="user", cascade=CascadeType.ALL)
+    private List<Valoration> userValorations = new ArrayList<Valoration>();
+    
+    @JsonIgnore
+	public List<Valoration> getUserValorations() {
+		return userValorations;
+	}
+	public void setUserValorations(List<Valoration> userValorations) {
+		this.userValorations = userValorations;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

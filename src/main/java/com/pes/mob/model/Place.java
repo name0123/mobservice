@@ -122,13 +122,37 @@ public class Place {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
+	
+	/**
+	 * Returns de adapted level of a place
+	 * @return
+	 */
 	public AdaptedLevel getAdaptedLevel() {
 		return adaptedLevel;
 	}
-
-	public void setAdaptedLevel(AdaptedLevel adaptedLevel) {
-		this.adaptedLevel = adaptedLevel;
-	}
-	
+	/**
+	 * Sets adaptedLevel of a place after a new valoration of the place!
+	 */
+	public void setAdaptedLevel(){
+        int iIsAccess = 0;
+        int iIsNotAccess = 0;
+        int iIsWc = 0;
+        int iIsNotWc = 0;
+        int iElevHas = 0;
+        int iElevHasNot = 0;
+        int iElevNoNeed = 0;
+        for (int i = 0; i < placeValorations.size(); ++i){
+            if (placeValorations.get(i).isAccess()) ++iIsAccess;
+            else ++iIsNotAccess;
+            if (placeValorations.get(i).isWc()) ++iIsWc;
+            else ++iIsNotWc;
+            if (placeValorations.get(i).getElevator().equals("HAS")) ++iElevHas;
+            else if (placeValorations.get(i).getElevator().equals("HAS_NOT")) ++iElevHasNot;
+            else ++iElevNoNeed;
+        }
+        if (iIsAccess > iIsNotAccess && iIsWc > iIsNotWc && ((iElevHas > iElevHasNot && iElevHas > iElevNoNeed) || (iElevNoNeed > iElevHas && iElevHasNot <= iElevNoNeed))) adaptedLevel = AdaptedLevel.TOTAL;
+        else if (iIsAccess == iIsNotAccess || iIsWc == iIsNotWc || (iElevHas == iElevHasNot && iElevHas == iElevNoNeed)) adaptedLevel = AdaptedLevel.UNKNOWN;
+        else if (iIsAccess < iIsNotAccess && iIsWc < iIsNotWc && ((iElevHasNot > iElevHas && iElevHasNot > iElevNoNeed))) adaptedLevel =AdaptedLevel.UNADAPTED;
+        else adaptedLevel = AdaptedLevel.PARTIAL;
+    }
 }

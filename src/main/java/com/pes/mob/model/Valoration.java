@@ -40,14 +40,18 @@ public class Valoration {
 	private String user_id;
 	private String four_id;
 	
-//	@ManyToOne
-//	@JoinColumn(name="user_id",insertable=false, updatable=false)
-//	private User user;
+	@ManyToOne
+	@JoinColumn(name="user_id",insertable=false, updatable=false)
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name="four_id",insertable=false, updatable=false)
 	private Place place;
 	
+
+	public enum Elev{
+		HAS,HAS_NOT,NO_NEED
+	}
 	
 	public String getUser_id() {
 		return user_id;
@@ -58,13 +62,13 @@ public class Valoration {
 	}
 
 	
-//	public User getUser() {
-//	return user;
-//}
-//
-//public void setUser(User user) {
-//	this.user = user;
-//}
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	public String getFour_id() {
 		return four_id;
@@ -80,10 +84,6 @@ public class Valoration {
 
 	public void setPlace(Place place) {
 		this.place = place;
-	}
-
-	public enum Elev{
-		HAS,HAS_NOT,NO_NEED
 	}
 
 	public String getValoration_id() {
