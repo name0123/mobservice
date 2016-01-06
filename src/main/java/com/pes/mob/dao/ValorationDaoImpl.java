@@ -42,7 +42,7 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
 	public void saveValoration(Valoration valor, User user, Place f) {
 		// TODO Auto-generated method stub
 		valor.setPlace(f);
-		valor.setUser(user);
+		//valor.setUser(user);
 		persist(valor);
 		
 		
