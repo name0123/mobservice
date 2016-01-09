@@ -40,10 +40,25 @@ public class UserController {
         userService.saveUser(user);
         return new ResponseEntity<User>(user,HttpStatus.OK);
     }
+    /**
+     * Updating an existing user
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    	String uid = user.getUser_id();
+    	User checkUser = null;
+    	checkUser = userService.findById(uid);
+    	if(checkUser!= null){
+    		userService.updateUser(user);
+    		return new ResponseEntity<User>(user,HttpStatus.OK);
+    	}
+    	return new ResponseEntity<User>(user,HttpStatus.BAD_REQUEST);
+    }
     
-    
-    /*
-     * This method will delete an employee by it's SSN value.
+    /**
+     * This method will delete an user by it's id.
      */
     @RequestMapping(value = { "/delete" }, method = RequestMethod.GET)
     public ResponseEntity deleteUser(@RequestParam String id) {
