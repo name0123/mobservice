@@ -40,4 +40,17 @@ public class UserController {
         userService.saveUser(user);
         return new ResponseEntity<User>(user,HttpStatus.OK);
     }
+    
+    
+    /*
+     * This method will delete an employee by it's SSN value.
+     */
+    @RequestMapping(value = { "/delete" }, method = RequestMethod.GET)
+    public ResponseEntity deleteUser(@RequestParam String id) {
+    	User u = null;
+    	u = userService.findById(id);
+        if(u == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        userService.deleteUser(u);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

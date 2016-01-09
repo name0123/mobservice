@@ -1,8 +1,8 @@
 /***
  * 	PLACE ENTITY
- * Table: MPLACE
+ * Table: PLACE
  * 	
-create table mplace (
+create table place (
 	id serial,
 	name VARCHAR(40),
 	latitude decimal,

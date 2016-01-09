@@ -30,4 +30,9 @@ public class UserDaoImpl extends AbstractDao<String, User> implements UserDao {
         criteria.add(Restrictions.eq("userN", userN));
         return (User) criteria.uniqueResult();
 	}
+
+	@Override
+	public void deleteUser(User user) {
+		delete(user);
+	}
 }
