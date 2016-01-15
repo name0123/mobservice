@@ -1,7 +1,15 @@
 package com.pes.mob.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
 import com.pes.mob.model.User;
+import com.pes.mob.model.ValorLatLong;
 import com.pes.mob.model.Valoration;
 import com.pes.mob.service.PlaceService;
 import com.pes.mob.service.UserService;
@@ -42,15 +51,76 @@ public class ValorationController {
        
     }   
     
-    
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<Valoration> saveValoration(@RequestBody Valoration valor) {
-    	User u = userService.findById(valor.getUser_id());
-    	Place p =  	placeService.findById(valor.getFour_id());
-    	valorationService.saveValoration(valor, u, p );
+    public ResponseEntity<Valoration> saveValoration(@RequestBody ValorLatLong vall) {
+    	Place p = getThePlace(vall.getLat(),vall.getLng());
+    	User u = userService.findById(vall.getUid());
+    	System.out.println("*^********************************************************");
+		System.out.println("*^********************************************************");
+    	System.out.println(p.getName()+' ' +p.getFour_id()+ ' '+ u.getName());
+    	Valoration v = new Valoration(vall.getAc(), vall.getWc(), vall.getEl(), vall.getUid(), p.getFour_id());
+    	valorationService.saveValoration(v, u, p );
     	placeService.updatePlace(p);
-    	return new ResponseEntity<Valoration>(valor,HttpStatus.OK);
+    	return new ResponseEntity<Valoration>(v,HttpStatus.OK);
 
-    }
+    }  
 
+      public static String callURL(String myURL) {
+  		System.out.println("Requested URL:" + myURL);
+  		StringBuilder sb = new StringBuilder();
+  		URLConnection urlConn = null;
+  		InputStreamReader in = null;
+  		try {
+  			URL url = new URL(myURL);
+  			urlConn = url.openConnection();
+  			if (urlConn != null)
+  				urlConn.setReadTimeout(60 * 1000);
+  			if (urlConn != null && urlConn.getInputStream() != null) {
+  				in = new InputStreamReader(urlConn.getInputStream(),
+  						Charset.defaultCharset());
+  				BufferedReader bufferedReader = new BufferedReader(in);
+  				if (bufferedReader != null) {
+  					int cp;
+  					while ((cp = bufferedReader.read()) != -1) {
+  						sb.append((char) cp);
+  					}
+  					bufferedReader.close();
+  				}
+  			}
+  		in.close();
+  		} catch (Exception e) {
+  			throw new RuntimeException("Exception while calling URL:"+ myURL, e);
+  		} 
+   
+  		return sb.toString();
+  	}
+   
+    
+	private Place getThePlace(Double lat, Double lng) {
+		String urls = "https://movibit.herokuapp.com/4square/search?ll="+lat.toString()+','+lng.toString();
+		String jstring = callURL(urls);
+		JSONArray jsonArray = null;
+		try {  
+			jsonArray = new JSONArray(jstring);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		JSONObject opl = null;
+		try {
+			opl = (JSONObject) jsonArray.get(0);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String sf = null;
+		try {
+			sf = (String) opl.get("four_id");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Place p = placeService.findById(sf);
+		return p;
+	}
 }
+

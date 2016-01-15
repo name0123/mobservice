@@ -1,16 +1,15 @@
 /**
  *  author: 
  *  
-CREATE TABLE valor
-(
-  valoration_id character varying(30),
-  access boolean,
-  wc boolean,
-  elevator character varying(8),
-  detail character varying(250),
-	PRIMARY KEY (valoration_id)
-)
- * 
+	create table valor(
+	  valoration_id serial PRIMARY KEY,
+	  user_id character varying(30) references fuser(user_id),
+	  four_id character varying(30) references place(four_id),
+	  access boolean,
+	  wc boolean,
+	  elevator character varying(8)
+	  );
+	 * 
  * 
  */
 package com.pes.mob.model;
@@ -25,7 +24,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class Valoration {
 	
 	@Id
-	@Column
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String valoration_id;
 	@Column
 	private boolean access;
@@ -34,8 +33,7 @@ public class Valoration {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Elev elevator;	
-	@Column
-	private String detail;
+	
 	
 	private String user_id;
 	private String four_id;
@@ -47,7 +45,17 @@ public class Valoration {
 	@ManyToOne
 	@JoinColumn(name="four_id",insertable=false, updatable=false)
 	private Place place;
+	public Valoration(){}
 	
+
+	public Valoration(boolean access, boolean wc, Elev elevator, String user_id, String four_id) {
+		super();
+		this.access = access;
+		this.wc = wc;
+		this.elevator = elevator;
+		this.user_id = user_id;
+		this.four_id = four_id;
+	}
 
 	public enum Elev{
 		HAS,HAS_NOT,NO_NEED
@@ -118,14 +126,6 @@ public class Valoration {
 		this.elevator = elevator;
 	}
 
-	public String getDetail() {
-		return detail;
-	}
-
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	
 	@Override
 	public String toString(){
 		return "valoration: id = " +valoration_id+ " user_id:"+"nouseryet"+" place:" + four_id;
