@@ -45,11 +45,17 @@ public class ValorationController {
        
     }
     
-    @RequestMapping(value = { "/get" }, method = RequestMethod.GET)
-    public Valoration getValoration(@RequestParam (value="ll", defaultValue="") String ll){
-       return valorationService.findByCoordinates(ll);
+    @RequestMapping(value = { "/get/coords" }, method = RequestMethod.GET)
+    public Valoration getValorationCoords(@RequestParam (value="ll", defaultValue="") String ll){
+       // out-of-date :: not well done!
+    	return valorationService.findByCoordinates(ll);
        
-    }   
+    }
+    @RequestMapping(value = { "/get/four" }, method = RequestMethod.GET)
+    public Valoration getValoration(@RequestParam (value="four", defaultValue="") String four_id){
+       return valorationService.findByFourId(four_id);
+       
+    }  
     
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public ResponseEntity<Valoration> saveValoration(@RequestBody ValorLatLong vall) {

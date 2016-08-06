@@ -17,8 +17,10 @@ public interface ValorationDao {
     void saveValoration(Valoration valor, User u, Place f);
     
     List<Valoration> findAllValorations();
-    
+    // this is not ok done buz who did it!
     Valoration findByCoordinates(String latitude, String longitude);
- 
+    
+    // this is ok
+    Valoration findByFourId(String four_id);
 }
 

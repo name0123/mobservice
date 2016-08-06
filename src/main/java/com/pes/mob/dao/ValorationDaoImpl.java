@@ -32,20 +32,35 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
  
     @Override
 	public Valoration findByCoordinates(String latitude, String longitude) {
+    	// impossible - you weren't thinking when you did this: 
+    	// restrictions are for the place!
 		Criteria criteria = createEntityCriteria();
+		
         criteria.add(Restrictions.eq("latitude", Double.parseDouble(latitude)));
         criteria.add(Restrictions.eq("longitude", Double.parseDouble(longitude)));
         return (Valoration) criteria.uniqueResult();
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public Valoration findByFourId(String four_id) {
+		Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("four_id", four_id));
+        List<Valoration> moreVals = (List<Valoration>) criteria.list();
+        int lastValoration = moreVals.size()-1;
+        // here you should calculate the average.
+        return (Valoration) moreVals.get(lastValoration);
+		
+	}
 
 	@Override
 	public void saveValoration(Valoration valor, User user, Place f) {
-		// TODO Auto-generated method stub
 		valor.setPlace(f);
-		//valor.setUser(user);
+		valor.setUser(user);
 		persist(valor);
 		
 		
 	}
+
+
 
 }
