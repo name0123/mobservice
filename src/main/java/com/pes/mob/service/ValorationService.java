@@ -11,7 +11,7 @@ public interface ValorationService {
 	Valoration findById(String valoration_id);
 	
 	Valoration findByCoordinates(String ll);
-	Valoration findByFourId(String ll);
+	List<Valoration> findByFourId(String ll);
      
     void saveValoration(Valoration valor);
     

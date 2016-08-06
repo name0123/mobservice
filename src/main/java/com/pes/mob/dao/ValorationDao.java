@@ -21,6 +21,6 @@ public interface ValorationDao {
     Valoration findByCoordinates(String latitude, String longitude);
     
     // this is ok
-    Valoration findByFourId(String four_id);
+    List<Valoration> findByFourId(String four_id);
 }
 

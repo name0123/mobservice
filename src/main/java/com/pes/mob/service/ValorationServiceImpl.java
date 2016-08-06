@@ -51,7 +51,7 @@ public class ValorationServiceImpl implements ValorationService {
 	}
     
     @Override
-   	public Valoration findByFourId(String four_id) {
+   	public List<Valoration> findByFourId(String four_id) {
    		return dao.findByFourId(four_id);
    	}
 	@Override

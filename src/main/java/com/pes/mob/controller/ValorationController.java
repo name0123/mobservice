@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pes.mob.model.Place;
 import com.pes.mob.model.User;
+import com.pes.mob.model.ValorFourId;
 import com.pes.mob.model.ValorLatLong;
 import com.pes.mob.model.Valoration;
 import com.pes.mob.service.PlaceService;
@@ -52,24 +53,34 @@ public class ValorationController {
        
     }
     @RequestMapping(value = { "/get/four" }, method = RequestMethod.GET)
-    public Valoration getValoration(@RequestParam (value="four", defaultValue="") String four_id){
-       return valorationService.findByFourId(four_id);
-       
+    public List<Valoration> getValorations(@RequestParam (value="four", defaultValue="") String four_id){
+    	// returns the valorations of the place with four_id=four
+    	Place p = placeService.findById(four_id);
+    	return valorationService.findByFourId(four_id);
+        // you should have a function to get last valoration       
     }  
-    
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ResponseEntity<Valoration> saveValoration(@RequestBody ValorLatLong vall) {
+
+    @RequestMapping(value = "/newcs", method = RequestMethod.POST)
+    public ResponseEntity<Valoration> saveValorationCs(@RequestBody ValorLatLong vall) {
     	Place p = getThePlace(vall.getLat(),vall.getLng());
     	User u = userService.findById(vall.getUid());
-    	System.out.println("*^********************************************************");
-		System.out.println("*^********************************************************");
-    	System.out.println(p.getName()+' ' +p.getFour_id()+ ' '+ u.getName());
     	Valoration v = new Valoration(vall.getAc(), vall.getWc(), vall.getEl(), vall.getUid(), p.getFour_id());
     	valorationService.saveValoration(v, u, p );
     	placeService.updatePlace(p);
     	return new ResponseEntity<Valoration>(v,HttpStatus.OK);
 
-    }  
+    }
+    @RequestMapping(value = "/newfi", method = RequestMethod.POST)
+    public ResponseEntity<Valoration> saveValorationFi(@RequestBody ValorFourId vall) {
+    	// we must have the place in DB (we called url search before!)
+    	Place p = placeService.findById(vall.getFour_id());
+    	User u = userService.findById(vall.getUid());
+    	Valoration v = new Valoration(vall.getAc(), vall.getWc(), vall.getEl(), vall.getUid(), vall.getFour_id());
+    	valorationService.saveValoration(v, u, p );
+    	placeService.updatePlace(p);
+    	return new ResponseEntity<Valoration>(v,HttpStatus.OK);
+
+    }
 
       public static String callURL(String myURL) {
   		System.out.println("Requested URL:" + myURL);
@@ -103,7 +114,8 @@ public class ValorationController {
    
     
 	private Place getThePlace(Double lat, Double lng) {
-		String urls = "https://movibit.herokuapp.com/4square/search?ll="+lat.toString()+','+lng.toString();
+		// this should be not used!
+		String urls = "https://mobserv.herokuapp.com/4square/search?ll="+lat.toString()+','+lng.toString();
 		String jstring = callURL(urls);
 		JSONArray jsonArray = null;
 		try {  

@@ -42,13 +42,12 @@ public class ValorationDaoImpl extends AbstractDao<String, Valoration> implement
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public Valoration findByFourId(String four_id) {
+	public List<Valoration> findByFourId(String four_id) {
+		// 
 		Criteria criteria = createEntityCriteria();
         criteria.add(Restrictions.eq("four_id", four_id));
         List<Valoration> moreVals = (List<Valoration>) criteria.list();
-        int lastValoration = moreVals.size()-1;
-        // here you should calculate the average.
-        return (Valoration) moreVals.get(lastValoration);
+        return (List<Valoration>) moreVals;
 		
 	}
 
