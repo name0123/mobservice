@@ -46,13 +46,13 @@ public class ValorationController {
        
     }
     
-    @RequestMapping(value = { "/get/coords" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/getcs" }, method = RequestMethod.GET)
     public Valoration getValorationCoords(@RequestParam (value="ll", defaultValue="") String ll){
        // out-of-date :: not well done!
     	return valorationService.findByCoordinates(ll);
        
     }
-    @RequestMapping(value = { "/get/four" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/getfour" }, method = RequestMethod.GET)
     public List<Valoration> getValorations(@RequestParam (value="four", defaultValue="") String four_id){
     	// returns the valorations of the place with four_id=four
     	Place p = placeService.findById(four_id);
@@ -70,7 +70,7 @@ public class ValorationController {
     	return new ResponseEntity<Valoration>(v,HttpStatus.OK);
 
     }
-    @RequestMapping(value = "/newfi", method = RequestMethod.POST)
+    @RequestMapping(value = "/newfour", method = RequestMethod.POST)
     public ResponseEntity<Valoration> saveValorationFi(@RequestBody ValorFourId vall) {
     	// we must have the place in DB (we called url search before!)
     	Place p = placeService.findById(vall.getFour_id());

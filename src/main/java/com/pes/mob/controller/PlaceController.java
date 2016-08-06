@@ -39,12 +39,12 @@ public class PlaceController {
 
     }
     
-    @RequestMapping(value = { "/get" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/getcs" }, method = RequestMethod.GET)
     public Place getPlace(@RequestParam (value="ll", defaultValue="") String ll){
        return placeService.findByCoordinates(ll);
        
     }
-    @RequestMapping(value = { "/getid" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/getfour" }, method = RequestMethod.GET)
     public Place getPlaceId(@RequestParam (value="id") String id){
        return placeService.findById(id);
        
