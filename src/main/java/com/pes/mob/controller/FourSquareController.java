@@ -51,7 +51,8 @@ public class FourSquareController {
     		@RequestParam(value="radius" , defaultValue="") String radius,
     		@RequestParam(value="sw" , defaultValue="") String sw,
     		@RequestParam(value="ne" , defaultValue="") String ne,
-    		@RequestParam(value="limit" , defaultValue="50") String limit
+    		@RequestParam(value="limit" , defaultValue="50") String limit,
+		@RequestParam(value="categoryId" , defaultValue="4d4b7105d754a06374d81259,4d4b7104d754a06370d81259") String categories
     		) throws IOException, JSONException {
     	URL targetUrl = new URL(url+"search?client_id="+ClientId+"&client_secret="+ClientSecret+"&v="+v);
     	if (!ll.equals("")) targetUrl = new URL(targetUrl.toString()+"&ll="+ll);
@@ -61,7 +62,7 @@ public class FourSquareController {
     	if (!radius.equals("") && sw.equals("") && ne.equals("")) targetUrl = new URL(targetUrl.toString()+"&radius="+radius);
     	if (url.equals(targetUrl.toString())) return null;
     	targetUrl = new URL(targetUrl.toString()+"&limit="+limit);
-    	//targetUrl = new URL(targetUrl.toString()+"&categoryId="+categories);
+    	targetUrl = new URL(targetUrl.toString()+"&categoryId="+categories);
     	//@RequestParam(value="categoryId" , defaultValue="4d4b7105d754a06374d81259,4d4b7104d754a06370d81259") String categories
     	System.out.println(targetUrl);
     	List<Place> result = getInfo(targetUrl);
