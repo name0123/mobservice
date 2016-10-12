@@ -1,1 +1,1 @@
-java $JAVA_OPTS -jar target/dependency/webapp-runner.jar $WEBAPP_RUNNER_OPTS --port $PORT target/MobService.war
+web: java $JAVA_OPTS -cp target\classes;"target\dependency\*" Main
