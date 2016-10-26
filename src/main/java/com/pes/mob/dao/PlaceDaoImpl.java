@@ -24,6 +24,7 @@ public class PlaceDaoImpl extends AbstractDao<String, Place> implements PlaceDao
     @SuppressWarnings("unchecked")
     public List<Place> findAllPlaces() {
         Criteria criteria = createEntityCriteria();
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return (List<Place>) criteria.list();
     }
     
