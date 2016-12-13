@@ -4,10 +4,10 @@
  
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pes.mob</groupId>
-    <artifactId>MobService</artifactId>
+    <artifactId>mobservice</artifactId>
     <packaging>war</packaging>
     <version>1.0.0</version>
-    <name>MobService</name>
+    <name>mobservice</name>
  
     <properties>
         <springframework.version>4.0.6.RELEASE</springframework.version>
@@ -193,7 +193,7 @@
                     <version>2.4</version>
                     <configuration>
                         <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                        <warName>MobService</warName>
+                        <warName>mobservice</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                         <packagingExcludes>WEB-INF/lib/tomcat-*.jar</packagingExcludes>
                     </configuration>
@@ -219,7 +219,7 @@
 		    
             </plugins>
         </pluginManagement>
-        <finalName>MobService</finalName>
+        <finalName>mobservice</finalName>
     </build>
     <repositories>
       <repository>
