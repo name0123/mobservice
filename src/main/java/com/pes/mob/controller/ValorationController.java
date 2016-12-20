@@ -76,6 +76,14 @@ public class ValorationController {
     	Place p = placeService.findById(vall.getFour_id());
     	User u = userService.findById(vall.getUid());
     	Valoration v = new Valoration(vall.getAc(), vall.getWc(), vall.getEl(), vall.getUid(), vall.getFour_id());
+		System.out.println("");
+		System.out.println("");
+		System.out.println("---------------------------------------------------------------------------------------------");
+		System.out.println("Votation arrived here!");
+		System.out.println("Place: "+p.getFour_id());
+		System.out.println("User : "+u.toString());
+		System.out.println("Vall : "+vall.getEl());
+		System.out.println("Valor: "+v.toString());
     	valorationService.saveValoration(v, u, p );
     	placeService.updatePlace(p);
     	return new ResponseEntity<Valoration>(v,HttpStatus.OK);

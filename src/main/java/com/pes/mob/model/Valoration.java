@@ -128,7 +128,7 @@ public class Valoration {
 
 	@Override
 	public String toString(){
-		return "valoration: id = " +valoration_id+ " user_id:"+"nouseryet"+" place:" + four_id;
+		return "valoration: id = " +valoration_id+ " user_id:"+user_id+" place:" + four_id + "access: "+ access + "wc: "+ wc + "elevator: "+ elevator.toString();
 	}
 	
 }

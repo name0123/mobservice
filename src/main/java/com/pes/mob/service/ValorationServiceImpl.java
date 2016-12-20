@@ -31,7 +31,10 @@ public class ValorationServiceImpl implements ValorationService {
         return dao.findById(valoration_id);
     }
  
+	
     public void saveValoration(Valoration valor) {
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(valor.toString());
         dao.saveValoration(valor);
     }
 
@@ -58,6 +61,8 @@ public class ValorationServiceImpl implements ValorationService {
 	public void saveValoration(Valoration valor, User u, Place f) {
 		// TODO Auto-generated method stub
 		// I need to check this out!
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(valor.toString());
 		 dao.saveValoration(valor, u, f);
 	}
 }

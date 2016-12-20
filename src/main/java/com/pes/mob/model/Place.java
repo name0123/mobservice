@@ -141,18 +141,36 @@ public class Place {
         int iElevHas = 0;
         int iElevHasNot = 0;
         int iElevNoNeed = 0;
-        for (int i = 0; i < placeValorations.size(); ++i){
-            if (placeValorations.get(i).isAccess()) ++iIsAccess;
-            else ++iIsNotAccess;
-            if (placeValorations.get(i).isWc()) ++iIsWc;
-            else ++iIsNotWc;
-            if (placeValorations.get(i).getElevator().equals("HAS")) ++iElevHas;
-            else if (placeValorations.get(i).getElevator().equals("HAS_NOT")) ++iElevHasNot;
-            else ++iElevNoNeed;
+        for (int i = 0; i < 1; ++i){
+			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+			System.out.println("acces of place    : "+placeValorations.get(i).isAccess());
+			System.out.println("Wc of place       : "+placeValorations.get(i).isWc());
+			
+			boolean a = placeValorations.get(i).isAccess();
+			boolean w = placeValorations.get(i).isWc();
+			boolean note = "HAS_NOT"== placeValorations.get(i).getElevator().toString();
+			boolean e = !note;
+			System.out.println("Elevator of place : "+e);
+			if(a&&w&&e) adaptedLevel = AdaptedLevel.TOTAL;
+			else if (a||w||e) adaptedLevel = AdaptedLevel.PARTIAL;	
+			else adaptedLevel = AdaptedLevel.UNADAPTED;
+			System.out.println("Level of place : "+adaptedLevel);
+            // if (placeValorations.get(i).isAccess()) ++iIsAccess;
+            // else ++iIsNotAccess;
+            // if (placeValorations.get(i).isWc()) ++iIsWc;
+            // else ++iIsNotWc;
+            // if (placeValorations.get(i).getElevator().equals("HAS")) ++iElevHas;
+            // else if (placeValorations.get(i).getElevator().equals("HAS_NOT")) ++iElevHasNot;
+            // else ++iElevNoNeed;
+			
         }
-        if (iIsAccess > iIsNotAccess && iIsWc > iIsNotWc && ((iElevHas > iElevHasNot && iElevHas > iElevNoNeed) || (iElevNoNeed > iElevHas && iElevHasNot <= iElevNoNeed))) adaptedLevel = AdaptedLevel.TOTAL;
-        else if (iIsAccess == iIsNotAccess || iIsWc == iIsNotWc || (iElevHas == iElevHasNot && iElevHas == iElevNoNeed)) adaptedLevel = AdaptedLevel.UNKNOWN;
-        else if (iIsAccess < iIsNotAccess && iIsWc < iIsNotWc && ((iElevHasNot > iElevHas && iElevHasNot > iElevNoNeed))) adaptedLevel =AdaptedLevel.UNADAPTED;
-        else adaptedLevel = AdaptedLevel.PARTIAL;
+		// System.out.println("*******************************************");
+		// System.out.println("iIsAccess  : "+iIsAccess);
+		// System.out.println("iIsNotWc   : "+iIsNotWc);
+		// System.out.println("iElevNoNeed: "+iElevNoNeed);
+        // if (iIsAccess > iIsNotAccess && iIsWc > iIsNotWc && ((iElevHas > iElevHasNot && iElevHas > iElevNoNeed) || (iElevNoNeed > iElevHas && iElevHasNot <= iElevNoNeed))) adaptedLevel = AdaptedLevel.TOTAL;
+        // else if (iIsAccess == iIsNotAccess || iIsWc == iIsNotWc || (iElevHas == iElevHasNot && iElevHas == iElevNoNeed)) adaptedLevel = AdaptedLevel.UNKNOWN;
+        // else if (iIsAccess < iIsNotAccess && iIsWc < iIsNotWc && ((iElevHasNot > iElevHas && iElevHasNot > iElevNoNeed))) adaptedLevel =AdaptedLevel.UNADAPTED;
+        // else adaptedLevel = AdaptedLevel.PARTIAL;
     }
 }
